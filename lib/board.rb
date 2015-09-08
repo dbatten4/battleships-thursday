@@ -3,17 +3,13 @@ require_relative 'ship'
 class Board
 
   attr_reader :ships
+
   def initialize
-    @ships = []
+    @ships = { A1: 0, B1: 0, A2: 0, B2: 0 }
   end
 
-  def place(ship)
-    @ships << ship
+  def appropriate_position?(coordinates)
+    self.ships.has_key?(coordinates)
   end
-
-  def receive_hit(position)
-    self.ships.find {|ship| ship.position == position} ? "Hit!" : "Miss!"
-  end
-
 
 end

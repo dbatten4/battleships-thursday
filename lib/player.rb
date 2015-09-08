@@ -5,14 +5,14 @@ class Player
 
   attr_reader :board, :hits, :misses
 
-  def initialize(klass = Board.new) 
+  def initialize(klass = Board.new)
     @board = klass
     @hits = []
     @misses = []
   end
 
   def place(ship)
-    self.board.ships << ship
+    self.board.ships[ship.coordinates] = ship if self.board.appropriate_position?(ship.coordinates)
   end
 
   def fire(position)
@@ -35,11 +35,9 @@ private
     self.hits << position if got_hit?(position)
   end
 
-
-
   def missed(position)
     self.misses << position if !got_hit?(position)
-  
+
   end
 
 end

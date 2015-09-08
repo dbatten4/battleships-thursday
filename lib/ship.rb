@@ -1,11 +1,11 @@
 
 class Ship
 
-  attr_reader :position
+  attr_reader :coordinates
 
-  def initialize(direction, position, size = 1, hits = 0)
+  def initialize(direction, coordinates, size = 1, hits = 0)
     @direction = direction
-    @position = position
+    @coordinates = coordinates
     @size = size
     @hits = hits
   end
