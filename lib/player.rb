@@ -5,8 +5,8 @@ class Player
 
   attr_reader :board, :hits, :misses
 
-  def initialize
-    @board = Board.new
+  def initialize(klass = Board.new) 
+    @board = klass
     @hits = []
     @misses = []
   end
@@ -15,7 +15,7 @@ class Player
     self.board.ships << ship
   end
 
-  def receive_hit(position)
+  def fire(position)
     return "You've hit a ship!" if struck(position)
     return "You've missed a ship!" if missed(position)
   end
