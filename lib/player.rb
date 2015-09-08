@@ -3,32 +3,41 @@ require_relative 'board'
 
 class Player
 
-  attr_reader :board, :hits, :total_hits
+  attr_reader :board, :hits, :misses
 
   def initialize
     @board = Board.new
     @hits = []
     @misses = []
-    @total_hits = 0
   end
 
   def place(ship)
-    @board.ships << ship
+    self.board.ships << ship
   end
 
   def receive_hit(position)
-    if board.ships.find {|ship| ship.position == position}
-      @hits << position
-      @total_hits += 1
-      "You've hit a ship!"
-    else
-      @misses << position
-      "You've missed!"
-    end
+    hitted(position)
+    missed(position)
   end
 
   def game_over?
-    self.board.ships.count == self.total_hits
+    self.board.ships.count == self.hits.length
+  end
+
+  private
+
+  def got_hit?(position)
+    board.ships.find {|ship| ship.position == position}
+  end
+
+  def hitted(position)
+    self.hits << position if got_hit?(position)
+    return "You've hit a ship!" if got_hit?(position)
+  end
+
+  def missed(position)
+    self.misses << position if !(got_hit?(position))
+    return "You've missed" if !(got_hit?(position))
   end
 
 end
