@@ -16,28 +16,30 @@ class Player
   end
 
   def receive_hit(position)
-    hitted(position)
-    missed(position)
+    return "You've hit a ship!" if struck(position)
+    return "You've missed a ship!" if missed(position)
   end
 
   def game_over?
     self.board.ships.count == self.hits.length
   end
 
-  private
+
+private
 
   def got_hit?(position)
     board.ships.find {|ship| ship.position == position}
   end
 
-  def hitted(position)
+  def struck(position)
     self.hits << position if got_hit?(position)
-    return "You've hit a ship!" if got_hit?(position)
   end
 
+
+
   def missed(position)
-    self.misses << position if !(got_hit?(position))
-    return "You've missed" if !(got_hit?(position))
+    self.misses << position if !got_hit?(position)
+  
   end
 
 end

@@ -13,6 +13,11 @@ describe Player do
     expect(subject.receive_hit("A1")).to eq("You've hit a ship!")
   end
 
+  it "can tell us when a ship is missed" do
+    subject.place(ship)
+    expect(subject.receive_hit("B4")).to eq("You've missed a ship!")
+  end
+
   it "can report hit positions" do
     subject.place(ship)
     subject.receive_hit("A1")
