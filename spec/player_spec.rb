@@ -5,7 +5,7 @@ describe Player do
   let(:ship) {double :ship, position: "A1"}
 
   it "can place a ship on the board" do
-    expect(subject.place(:ship)).to eq(subject.board.ships)
+    expect(subject.place(:ship)).to eq(subject.board)
   end
 
   it "can tell us when a ship is hit" do
