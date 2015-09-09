@@ -20,11 +20,11 @@ class Player
   end
 
   def game_over?
-    board.count == hits.length
+    board.length == hits.length
   end
 
 
-private
+  private
 
   def got_hit?(coordinates)
     board.find {|ship| ship.coordinates == coordinates}
