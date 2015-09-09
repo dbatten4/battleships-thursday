@@ -1,6 +1,7 @@
 require_relative 'ship'
 
 class Player
+  COORDINATES = [:A1, :B1, :A2, :B2]
 
   attr_reader :board, :hits, :misses
 
@@ -11,6 +12,7 @@ class Player
   end
 
   def place(ship)
+    fail "Wrong coordinates" if wrong_coordinates?(ship)
     board << ship
   end
 
@@ -36,6 +38,10 @@ class Player
 
   def missed(coordinates)
     misses << coordinates if !got_hit?(coordinates)
+  end
+
+  def wrong_coordinates?(ship)
+    !COORDINATES.include?(ship.coordinates)
   end
 
 end
