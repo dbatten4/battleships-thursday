@@ -19,7 +19,7 @@ describe Player do
   it "we missed a ship when we fire" do
     ship = Ship.new
     subject.place(ship, :A1)
-    expect(subject.fire :C1).to eq "You've missed a ship!"
+    expect(subject.fire :B1).to eq "You've missed a ship!"
   end
 
   it 'the game can end' do
@@ -67,6 +67,20 @@ describe Player do
     subject.fire(:A1)
     expect{subject.fire(:A1)}.to raise_error "You can\'t hit the same position twice"
   end
+
+  it 'can\'t place more than one ship on the same coordinate' do
+    ship1 = Ship.new
+    ship2 = Ship.new
+    subject.place(ship1, :A1)
+    expect{ subject.place(ship2, :A1) }.to raise_error "You can\'t place more than one ship on the same coordinate"
+  end
+
+  it 'can only fire within the board' do 
+    ship1 = Ship.new
+    subject.place(ship1, :A1)
+    expect{ subject.fire(:A0) }.to raise_error "You can only fire within the board"
+  end
+
 
 
 end

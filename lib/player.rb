@@ -9,16 +9,19 @@ class Player
     @board = []
     @hits = []
     @misses = []
+    @positions = []
   end
 
   def place(ship, coordinates)
+    fail "You can\'t place more than one ship on the same coordinate" if @positions.include?(coordinates)
     ship.coordinates = coordinates
+    @positions << coordinates
     fail "Wrong coordinates" if wrong_coordinates?(ship)
     board << ship
   end
 
   def fire(coordinates)
-    # p struck(coordinates)
+    fail "You can only fire within the board" if !COORDINATES.include?(coordinates)
     fail "You can\'t hit the same position twice" if already_fired?(coordinates)
     return "You've hit a ship!" if struck(coordinates)
     return "You've missed a ship!" if missed(coordinates)
