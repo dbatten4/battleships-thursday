@@ -61,5 +61,12 @@ describe Player do
     expect(ship.coordinates).to eq(:A1)
   end
 
+  it 'you can\'t hit the same position twice' do
+    ship = Ship.new
+    subject.place(ship, :A1)
+    subject.fire(:A1)
+    expect{subject.fire(:A1)}.to raise_error "You can\'t hit the same position twice"
+  end
+
 
 end

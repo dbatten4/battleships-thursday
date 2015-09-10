@@ -18,6 +18,8 @@ class Player
   end
 
   def fire(coordinates)
+    # p struck(coordinates)
+    fail "You can\'t hit the same position twice" if already_fired?(coordinates)
     return "You've hit a ship!" if struck(coordinates)
     return "You've missed a ship!" if missed(coordinates)
   end
@@ -30,14 +32,16 @@ class Player
   private
 
   def got_hit?(coordinates)
+    boolean = false
     board.each do |ship|
       if ship.coordinates == coordinates
         ship.hits +=1
+        boolean = true
       else
-        return false
+        false
       end
     end
-    # board.find {|ship| ship.coordinates == coordinates}
+    boolean
   end
 
   def struck(coordinates)
@@ -50,6 +54,10 @@ class Player
 
   def wrong_coordinates?(ship)
     !COORDINATES.include?(ship.coordinates)
+  end
+
+  def already_fired?(coordinates)
+    hits.include?(coordinates) || misses.include?(coordinates)
   end
 
 end
