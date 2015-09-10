@@ -11,7 +11,8 @@ class Player
     @misses = []
   end
 
-  def place(ship)
+  def place(ship, coordinates)
+    ship.coordinates = coordinates
     fail "Wrong coordinates" if wrong_coordinates?(ship)
     board << ship
   end
@@ -29,7 +30,14 @@ class Player
   private
 
   def got_hit?(coordinates)
-    board.find {|ship| ship.coordinates == coordinates}
+    board.each do |ship|
+      if ship.coordinates == coordinates
+        ship.hits +=1
+      else
+        return false
+      end
+    end
+    # board.find {|ship| ship.coordinates == coordinates}
   end
 
   def struck(coordinates)
