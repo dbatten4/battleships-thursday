@@ -1,38 +1,24 @@
 # Battleships
 
-This is a program on the Battleships game.
+This is my second attempt at the challenge.
 
-Classes
+This challenge is to replicate the classic board game Battleships, implementing the following rules.
 
-Player
- 
-Responsibilities:
+After each player has placed their ships on their own board they take turns to shoot on the opponent's board. In each round, each player takes a turn to announce a target square in the opponent's grid which is to be shot at. The opponent announces whether or not the square is occupied by a ship, and if it is a hit, they mark this on their own primary grid. The attacking player notes the hit or miss on their own tracking grid, in order to build up a picture of the opponent's fleet.
+When all of one player's ships have been sunk the game finishes and the player who has ships remaining is the winner.
 
-* can win or lose
-* can win if all ships are sunk
-* player can place ships
-* can report hit positions
-* can report miss positions
-* can tell us when a ship has been hit
+## Getting started
 
-Ship
+Run 
+`git clone https://github.com/dbatten4/battleships.git`
+to clone this repo and 
+`gem install rspec`
+to install the testing framework
 
-Responsibilities:
+## Usage
 
-* has a position when created
-* different sizes
-* can be hit or miss
-* will record number of hits
-* will not be hit when it is missed
-* can sink
-* place in a direction
+This project does not currently have the capability to be hosted on a server. The functionality can be tested in irb.
 
-Board
+## Running tests
 
-Responsibilities:
-
-* takes ships
-* reprots missed hit when no ship at position
-* can receive a hit on a ship
-* can report if all ships are sunk
-* does not allow ships to cross-over (occupied or not)
+run `rspec` to run the tests
